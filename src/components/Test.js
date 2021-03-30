@@ -6,7 +6,7 @@ export class Test extends Component {
     componentDidMount() {
         this.props.shuffleDeck()
     }
-
+    
     render() {
         return (
             <div>

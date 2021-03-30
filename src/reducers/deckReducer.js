@@ -5,8 +5,9 @@ import {
 export default (state = {}, action) => {
     switch (action.type) {
         case SHUFFLE:
-            return{...state, deck: action.payload}
-        default:
-            return state
-    }
-}
+            return{...state, deckId: action.payload}
+            default:
+                return state
+            }
+        }
+        
