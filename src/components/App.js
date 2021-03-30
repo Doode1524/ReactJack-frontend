@@ -8,8 +8,8 @@ const App = () => {
   
     return (
         <div>
+            Welcome! Click to get started!
             <Test />
-            Hello Blackjack App!
         </div>
     )
 }

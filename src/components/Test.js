@@ -1,19 +1,28 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { shuffleDeck } from '../actions'
+import { shuffleDeck, drawTwoCards } from '../actions'
+import Draw from './Draw'
 
 export class Test extends Component {
     componentDidMount() {
         this.props.shuffleDeck()
     }
-    
+
+    onClick = () => {
+        this.props.drawTwoCards(this.props.deckId)
+    }
+
     render() {
         return (
             <div>
-                Fetch Test
+                <Draw onClick={this.onClick} />
             </div>
         )
     }
 }
 
-export default connect(null, {shuffleDeck})(Test)
+const mapStateToProps = (state) => {
+    return {deckId: state.deckId}
+}
+
+export default connect(mapStateToProps, {shuffleDeck, drawTwoCards})(Test)
