@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware, compose } from 'redux'
 import reduxThunk from 'redux-thunk'
+import deckReducer from './reducers/deckReducer'
 
 import App from './components/App'
 
@@ -10,7 +11,7 @@ import App from './components/App'
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
 const store = createStore(
-    () => {},
+    deckReducer,
     composeEnhancers(applyMiddleware(reduxThunk))
 )
 
