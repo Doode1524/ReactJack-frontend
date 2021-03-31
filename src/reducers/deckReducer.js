@@ -13,7 +13,7 @@ export default (state = INITIAL_STATE, action) => {
         case DRAW_TWO:
             return {...state, cards: action.payload.cards }
         case DRAW_ONE:
-            return {...state, cards: action.payload.cards }
+            return {...state, cards: [...state.cards, action.payload.cards] }
         default:
             return state
         }

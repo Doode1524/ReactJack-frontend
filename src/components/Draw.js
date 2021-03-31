@@ -1,19 +1,27 @@
 
 import React from 'react'
-import { drawTwoCards } from '../actions'
-import { connect } from 'react-redux'
+import { drawTwoCards, drawOneCard } from '../actions'
+import { connect, useDispatch } from 'react-redux'
+import { useState, useEffect } from 'react'
 // import Options from './Options'
 
 const Draw = (props) => {
 
-    const onClick = () => {
+    const handleDrawTwo = () => {
         props.drawTwoCards(props.deckId)
+    }
+
+    const handleDrawOne = () => {
+        props.drawOneCard(props.deckId)
     }
 
     const button = () => {
         if (props.cards) {
             return (
-                <button>Hit Me</button>
+                <><button onClick={handleDrawOne}>Hit Me</button>
+                <button>Stay</button>
+                <button>Split</button>
+                <button>Double Down</button></>
             )
         }
     }
@@ -22,15 +30,13 @@ const Draw = (props) => {
         return (
             props.cards && props.cards.map((card, i) => (
                 <img src={card.image} key={i} />
-                ))
-                
-                )
+                )))
             }
             
             return (
                 <div>
             <div>
-                <button onClick={onClick}>Draw</button>
+                <button onClick={handleDrawTwo}>Draw</button>
             </div>
             <div>
                 {drawnCards()}
@@ -47,4 +53,4 @@ const mapStateToProps = (state) => {
     return {cards: state.cards, deckId: state.deckId}
 }
 
-export default connect(mapStateToProps, { drawTwoCards })(Draw)
+export default connect(mapStateToProps, { drawTwoCards, drawOneCard })(Draw)
