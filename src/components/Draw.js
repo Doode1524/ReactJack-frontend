@@ -27,10 +27,11 @@ const Draw = (props) => {
     }
 
     const drawnCards = () => {
+        console.log(props.cards)
         return (
             props.cards && props.cards.map((card, i) => (
                 <img src={card.image} key={i} />
-                )))
+        )))
     }
 
     return (
