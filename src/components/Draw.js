@@ -9,7 +9,6 @@ const Draw = (props) => {
 
     const handleDrawTwo = () => {
         props.drawTwoCards(props.deckId)
-        // props.dealerDrawOne(props.deckId)
     }
 
     const handleUserDrawOne = () => {
@@ -48,12 +47,12 @@ const Draw = (props) => {
     }
 
     return (
-        <div>
+        <div className ='ui container'>
             <div>
                 <button onClick={handleDrawTwo}>Draw</button>
             </div>
             <div>
-                <div>
+                <div >
                     {dealerDrawnCards()}
                 </div>
                     {userDrawnCards()}
