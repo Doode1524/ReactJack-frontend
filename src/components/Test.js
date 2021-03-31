@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { shuffleDeck, drawTwoCards } from '../actions'
 import Draw from './Draw'
-
 export class Test extends Component {
     componentDidMount() {
         this.props.shuffleDeck()
