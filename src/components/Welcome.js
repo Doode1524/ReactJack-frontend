@@ -2,19 +2,18 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { shuffleDeck, drawTwoCards } from '../actions'
 import Draw from './Draw'
-export class Test extends Component {
+import { Link } from 'react-router-dom'
+
+export class Welcome extends Component {
     componentDidMount() {
         this.props.shuffleDeck()
-    }
-
-    onClick = () => {
-        this.props.drawTwoCards(this.props.deckId)
     }
 
     render() {
         return (
             <div>
-                <Draw onClick={this.onClick} />
+                <h2>Welcome! Click to get started!</h2>
+                <button><Link to='/play'>Start</Link></button>
             </div>
         )
     }
@@ -24,4 +23,4 @@ const mapStateToProps = (state) => {
     return {deckId: state.deckId}
 }
 
-export default connect(mapStateToProps, {shuffleDeck, drawTwoCards})(Test)
+export default connect(mapStateToProps, {shuffleDeck, drawTwoCards})(Welcome)
