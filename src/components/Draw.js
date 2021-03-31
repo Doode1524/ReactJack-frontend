@@ -1,6 +1,6 @@
 
 import React from 'react'
-import { drawTwoCards, drawOneCard } from '../actions'
+import { drawTwoCards, userDrawOne, dealerDrawOne } from '../actions'
 import { connect, useDispatch } from 'react-redux'
 import { useState, useEffect } from 'react'
 // import Options from './Options'
@@ -9,27 +9,40 @@ const Draw = (props) => {
 
     const handleDrawTwo = () => {
         props.drawTwoCards(props.deckId)
+        // props.dealerDrawOne(props.deckId)
     }
 
-    const handleDrawOne = () => {
-        props.drawOneCard(props.deckId)
+    const handleUserDrawOne = () => {
+        props.userDrawOne(props.deckId)
     }
 
     const buttons = () => {
-        if (props.cards) {
+        if (props.userCards && props.dealerCards) {
             return (
-                <><button onClick={handleDrawOne}>Hit Me</button>
+                <><button onClick={handleUserDrawOne}>Hit Me</button>
                 <button>Stay</button>
                 <button>Split</button>
-                <button>Double Down</button></>
+                <button>Double Down</button>
+                <div>
+                    <h3>Total:</h3>
+                </div>
+                </>
             )
         }
     }
 
-    const drawnCards = () => {
-        console.log(props.cards)
+    const dealerDrawnCards = () => {
+        console.log(props.userCards)
         return (
-            props.cards && props.cards.map((card, i) => (
+            props.dealerCards && props.dealerCards.map((card, i) => (
+                <img src={card.image} key={i} />
+        )))
+    }
+
+    const userDrawnCards = () => {
+        console.log(props.userCards)
+        return (
+            props.userCards && props.userCards.map((card, i) => (
                 <img src={card.image} key={i} />
         )))
     }
@@ -40,18 +53,27 @@ const Draw = (props) => {
                 <button onClick={handleDrawTwo}>Draw</button>
             </div>
             <div>
-                {drawnCards()}
+                <div>
+                    {dealerDrawnCards()}
+                </div>
+                    {userDrawnCards()}
                 <div>
                     {buttons()}
                     {/* <Options /> */}
                 </div>
             </div>
         </div>
+
     )
 }
 
 const mapStateToProps = (state) => {
-    return {cards: state.cards, deckId: state.deckId}
+    return {
+        // cards: state.cards, 
+        deckId: state.deckId,
+        userCards: state.userCards,
+        dealerCards: state.dealerCards
+    }
 }
 
-export default connect(mapStateToProps, { drawTwoCards, drawOneCard })(Draw)
+export default connect(mapStateToProps, { drawTwoCards, userDrawOne, dealerDrawOne})(Draw)

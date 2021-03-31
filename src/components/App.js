@@ -4,17 +4,18 @@ import { shuffleDeck } from '../actions'
 import { connect } from 'react-redux'
 import Welcome from './Welcome'
 import Draw from './Draw'
+import '../app.css'
 
 const App = () => {
   
     return (
         <Router>
-            <>
-            <Switch>
-                <Route path='/' exact component={Welcome} />
-                <Route path='/play' exact component={Draw} />
-            </Switch>
-            </>
+            <div className='app'>
+                <Switch>
+                    <Route path='/' exact component={Welcome} />
+                    <Route path='/play' exact component={Draw} />
+                </Switch>
+            </div>
         </Router>
     )
 }
