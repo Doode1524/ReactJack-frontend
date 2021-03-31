@@ -2,7 +2,7 @@ import axios from 'axios'
 import {
     SHUFFLE,
     DRAW_TWO,
-    // DRAW_ONE
+    DRAW_ONE
 } from './types'
 
 export const shuffleDeck = () => async dispatch => { 
@@ -18,9 +18,9 @@ export const drawTwoCards = (deckId) => async dispatch => {
 
 }
 
-// export const drawOneCard = (deckId) => async dispatch => { 
-//     const response = await axios.get(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`)
-//     dispatch({ type: DRAW_ONE, payload: response.data })
-//     console.log(response.data.cards)
+export const drawOneCard = (deckId) => async dispatch => { 
+    const response = await axios.get(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`)
+    dispatch({ type: DRAW_ONE, payload: response.data })
+    console.log(response.data.cards)
 
-// }
+}
