@@ -15,7 +15,7 @@ const Draw = (props) => {
         props.drawOneCard(props.deckId)
     }
 
-    const button = () => {
+    const buttons = () => {
         if (props.cards) {
             return (
                 <><button onClick={handleDrawOne}>Hit Me</button>
@@ -31,17 +31,17 @@ const Draw = (props) => {
             props.cards && props.cards.map((card, i) => (
                 <img src={card.image} key={i} />
                 )))
-            }
-            
-            return (
-                <div>
+    }
+
+    return (
+        <div>
             <div>
                 <button onClick={handleDrawTwo}>Draw</button>
             </div>
             <div>
                 {drawnCards()}
                 <div>
-                    {button()}
+                    {buttons()}
                     {/* <Options /> */}
                 </div>
             </div>
