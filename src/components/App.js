@@ -12,9 +12,9 @@ const App = () => {
     return (
         <Router>
             <div className='app'>
-                <User />
                 <Switch>
-                    <Route path='/' exact component={Welcome} />
+                    <Route path='/' exact component={User} />
+                    <Route path='/start' exact component={Welcome} />
                     <Route path='/play' exact component={Draw} />
                 </Switch>
             </div>
