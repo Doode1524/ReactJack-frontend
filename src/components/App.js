@@ -1,5 +1,6 @@
 import React from 'react'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import history from '../history'
+import { Router, Route, Switch } from 'react-router-dom'
 import { shuffleDeck } from '../actions'
 import { connect } from 'react-redux'
 import Welcome from './Welcome'
@@ -10,7 +11,7 @@ import '../app.css'
 const App = () => {
   
     return (
-        <Router>
+        <Router history={history}>
             <div className='app'>
                 <Switch>
                     <Route path='/' exact component={SignIn} />
