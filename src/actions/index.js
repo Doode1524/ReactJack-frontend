@@ -1,9 +1,11 @@
+import history from '../history'
 import axios from 'axios'
 import {
     SHUFFLE,
     DRAW_TWO,
     USER_DRAW_ONE,
-    DEALER_DRAW_ONE
+    DEALER_DRAW_ONE,
+    CREATE_USER
 } from './types'
 
 export const shuffleDeck = () => async dispatch => { 
@@ -32,4 +34,18 @@ export const dealerDrawOne = (deckId) => async dispatch => {
     dispatch({ type: DEALER_DRAW_ONE, payload: response.data })
     // console.log(response.data)
 
+}
+
+export const createUser = (user) => async dispatch => { 
+    const response = await axios.post(`http://localhost:3001/users`, { 
+        email: user.email,
+        password: user.password
+    })
+    .then((response) => {
+        console.log(response);
+    })
+
+    dispatch({ type: CREATE_USER, payload: response.data })
+    console.log(response.data)
+    history.push('/start')  
 }

@@ -8,7 +8,8 @@ import { useState, useEffect } from 'react'
 const Draw = (props) => {
 
     const handleDrawTwo = () => {
-        props.drawTwoCards(props.deckId)
+        dispatch(drawTwoCards(props.deckId))
+        // props.drawTwoCards(props.deckId)
     }
 
     const handleUserDrawOne = () => {
@@ -29,6 +30,8 @@ const Draw = (props) => {
             )
         }
     }
+
+    const dispatch = useDispatch()
 
     const dealerDrawnCards = () => {
         console.log(props.userCards)
@@ -69,10 +72,11 @@ const Draw = (props) => {
 const mapStateToProps = (state) => {
     return {
         // cards: state.cards, 
-        deckId: state.deckId,
-        userCards: state.userCards,
-        dealerCards: state.dealerCards
+        deckId: state.deck.deckId,
+        userCards: state.deck.userCards,
+        dealerCards: state.deck.dealerCards
     }
 }
 
-export default connect(mapStateToProps, { drawTwoCards, userDrawOne, dealerDrawOne})(Draw)
+
+export default connect(mapStateToProps, { drawTwoCards, userDrawOne, dealerDrawOne })(Draw)

@@ -1,6 +1,8 @@
   
 import React from 'react';
 import { useState } from 'react'
+import { createUser } from '../actions'
+import { connect, useDispatch } from 'react-redux'
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -49,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn() {
+function SignUp() {
   const classes = useStyles();
 
   const [user, setUser] = useState({
@@ -59,21 +61,8 @@ export default function SignIn() {
   
   const handleSubmit = (e) => {
     e.preventDefault()
-      const configObj = {
-      method: 'POST',
-      headers: {
-        "Content-Type": "application/json",
-        "Accepts": "application/json"
-      },
-      body: JSON.stringify({user:{email: user.email, password: user.password}})
-    }
-
-    fetch('http://localhost:3001/users', configObj)
-      .then(res => res.json())
-      .then(data => console.log(data))
-
-      history.push('/start')
-}
+    createUser(user)
+  }
 
   const handleChange = (event) => {
     setUser({
@@ -81,6 +70,31 @@ export default function SignIn() {
     })
     console.log(event.target.value)
   }
+
+  //   const handleSubmit = (e) => {
+    //     e.preventDefault()
+    //       const configObj = {
+      //       method: 'POST',
+      //       headers: {
+//         "Content-Type": "application/json",
+//         "Accepts": "application/json"
+//       },
+//       body: JSON.stringify({user:{email: user.email, password: user.password}})
+//     }
+
+//     fetch('http://localhost:3001/users', configObj)
+//       .then(res => res.json())
+//       .then(data => console.log(data))
+
+//       history.push('/start')
+// }
+
+
+  // const useEffect = (() => {
+  //   createUser()
+
+  // },[createUser()])
+  
 
   return (
     <Container component="main" maxWidth="xs">
@@ -152,3 +166,11 @@ export default function SignIn() {
     </Container>
   );
 }
+
+const mapStateToProps = (state) => {
+  return {
+      user: state.user
+  }
+}
+
+export default connect(mapStateToProps, { createUser })(SignUp)
