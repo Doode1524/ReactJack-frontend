@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function SignUp() {
+function SignUp({createUser}) {
   const classes = useStyles();
 
   const [user, setUser] = useState({
@@ -61,6 +61,7 @@ function SignUp() {
   
   const handleSubmit = (e) => {
     e.preventDefault()
+    console.log(user)
     createUser(user)
   }
 
@@ -169,7 +170,7 @@ function SignUp() {
 
 const mapStateToProps = (state) => {
   return {
-      user: state.user
+      user: state.user.user
   }
 }
 

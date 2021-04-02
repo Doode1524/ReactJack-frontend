@@ -21,3 +21,18 @@
 // }
 
 // export default connect(mapStateToProps, { drawOneCard })(Options)
+
+
+// let cards = ["KING", "QUEEN", "JACK", 5, 4];
+// let values = [];
+
+// pushvalues = () => {
+//   cards.map((card) => {
+//     if (card == "KING" || card == "QUEEN" || card == "JACK") values.push(10);
+//     else {
+//       values.push(card);
+//     }
+//     return values;
+//   });
+// };
+

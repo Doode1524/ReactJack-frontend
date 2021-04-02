@@ -37,12 +37,8 @@ export const dealerDrawOne = (deckId) => async dispatch => {
 }
 
 export const createUser = (user) => async dispatch => { 
-    const response = await axios.post(`http://localhost:3001/users`, { 
-        email: user.email,
-        password: user.password
-    })
-    .then((response) => {
-        console.log(response);
+    const response = await axios.post(`http://localhost:3001/users`, {
+        user
     })
 
     dispatch({ type: CREATE_USER, payload: response.data })
