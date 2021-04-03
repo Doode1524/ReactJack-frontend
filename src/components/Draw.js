@@ -7,9 +7,35 @@ import { useState, useEffect } from 'react'
 
 const Draw = (props) => {
 
+    let userValues = []
+    let aces = []
+    let v
+   
+
+
     const handleDrawTwo = () => {
         dispatch(drawTwoCards(props.deckId))
-        // props.drawTwoCards(props.deckId)
+        
+    }
+
+    const checkBlackJack = () => {
+
+        if (props.userCards){
+            v = props.userCards.map(card => card.value);
+        
+
+        if (v.includes("ACE") && v.includes('KING')) {
+          console.log('win') 
+        } else if (v.includes("ACE") && v.includes('QUEEN')) {
+          console.log('win') 
+        } else if (v.includes("ACE") && v.includes('JACK')) {
+          console.log('win') 
+        } else if (v.includes("ACE") && v.includes("10")) {
+          console.log('win')
+        } else {
+          console.log("play")
+        }
+    } 
     }
 
     const handleUserDrawOne = () => {
@@ -34,6 +60,7 @@ const Draw = (props) => {
     const dispatch = useDispatch()
 
     const dealerDrawnCards = () => {
+        checkBlackJack()
         console.log(props.userCards)
         return (
             props.dealerCards && props.dealerCards.map((card, i) => (
