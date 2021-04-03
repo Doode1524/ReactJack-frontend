@@ -3,6 +3,7 @@ import React from 'react'
 import { drawTwoCards, userDrawOne, dealerDrawOne, shuffleDeck } from '../actions'
 import { connect, useDispatch } from 'react-redux'
 import { useState, useEffect } from 'react'
+import '../cards.css'
 // import Options from './Options'
 
 const Draw = (props) => {
@@ -37,6 +38,34 @@ const Draw = (props) => {
         }
     } 
     }
+
+    // const handleUserValues = () => {
+        
+    //     if (props.userCards) {
+    //         let uValues = props.userCards.map(card => parseInt(card.value)).reduce((a, b) => a + b, 0)
+    //         props.userCards.map((card) => {
+
+    //             if (card.value == "KING" || card.value == "QUEEN" || card.value == "JACK") {
+    //                 card.value = 10
+    //                 return
+
+    //             } else if 
+    //             (card.code == "AC" || card.code == "AS" || card.code == "AH" || card.code == "AD") {
+                        
+    //                     if (uValues > 11) {
+    //                         card.value = 1
+    //                         return
+    //                     } else {
+    //                         card.value = 11
+    //                         return
+    //                     }
+    //                 }
+    //             }
+                
+    //             )
+    //             console.log(uValues, 'uValues')
+    //     }
+    // }
 
     const pushUserValues = () => {
 
@@ -104,7 +133,7 @@ const Draw = (props) => {
     }
 
     return (
-        <div className ='ui container'>
+        <div className ='cards-div'>
             <div>
                 <button onClick={handleDrawTwo}>Draw</button>
                 <button onClick={handleShuffle}>Shuffle Deck</button>
@@ -135,3 +164,6 @@ const mapStateToProps = (state) => {
 
 
 export default connect(mapStateToProps, { drawTwoCards, userDrawOne, dealerDrawOne, shuffleDeck })(Draw)
+
+
+// uValues = props.userCards.map(card => parseInt(card.value)).reduce((a, b) => a + b, 0)
