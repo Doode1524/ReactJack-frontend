@@ -72,31 +72,6 @@ function SignUp({createUser}) {
     console.log(event.target.value)
   }
 
-  //   const handleSubmit = (e) => {
-    //     e.preventDefault()
-    //       const configObj = {
-      //       method: 'POST',
-      //       headers: {
-//         "Content-Type": "application/json",
-//         "Accepts": "application/json"
-//       },
-//       body: JSON.stringify({user:{email: user.email, password: user.password}})
-//     }
-
-//     fetch('http://localhost:3001/users', configObj)
-//       .then(res => res.json())
-//       .then(data => console.log(data))
-
-//       history.push('/start')
-// }
-
-
-  // const useEffect = (() => {
-  //   createUser()
-
-  // },[createUser()])
-  
-
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />

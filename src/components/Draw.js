@@ -1,6 +1,6 @@
 
 import React from 'react'
-import { drawTwoCards, userDrawOne, dealerDrawOne } from '../actions'
+import { drawTwoCards, userDrawOne, dealerDrawOne, shuffleDeck } from '../actions'
 import { connect, useDispatch } from 'react-redux'
 import { useState, useEffect } from 'react'
 // import Options from './Options'
@@ -13,6 +13,10 @@ const Draw = (props) => {
    
     const handleDrawTwo = () => {
         dispatch(drawTwoCards(props.deckId))
+    }
+
+    const handleShuffle = () => {
+        props.shuffleDeck()
     }
 
     const checkBlackJack = () => {
@@ -99,6 +103,7 @@ const Draw = (props) => {
         <div className ='ui container'>
             <div>
                 <button onClick={handleDrawTwo}>Draw</button>
+                <button onClick={handleShuffle}>Shuffle Deck</button>
             </div>
             <div>
                 <div >
@@ -125,4 +130,4 @@ const mapStateToProps = (state) => {
 }
 
 
-export default connect(mapStateToProps, { drawTwoCards, userDrawOne, dealerDrawOne })(Draw)
+export default connect(mapStateToProps, { drawTwoCards, userDrawOne, dealerDrawOne, shuffleDeck })(Draw)
