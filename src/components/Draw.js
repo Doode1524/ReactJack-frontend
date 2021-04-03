@@ -63,12 +63,16 @@ const Draw = (props) => {
     const handleUserDrawOne = () => {
         props.userDrawOne(props.deckId)
     }
+    
+    const handleDealerDrawOne = () => {
+        props.dealerDrawOne(props.deckId)
+    }
 
     const buttons = () => {
         if (props.userCards && props.dealerCards) {
             return (
                 <><button onClick={handleUserDrawOne}>Hit Me</button>
-                <button>Stay</button>
+                <button onClick={handleDealerDrawOne}>Stay</button>
                 <button>Split</button>
                 <button>Double Down</button>
                 <div>
@@ -82,7 +86,7 @@ const Draw = (props) => {
     const dispatch = useDispatch()
 
     const dealerDrawnCards = () => {
-        console.log(props.userCards)
+        console.log(props.dealerCards, 'dealer cards')
         return (
             props.dealerCards && props.dealerCards.map((card, i) => (
                 <img src={card.image} key={i} />

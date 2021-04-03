@@ -16,7 +16,7 @@ export default (state = INITIAL_STATE, action) => {
         case USER_DRAW_ONE:
             return {...state, userCards: [...state.userCards, action.payload.cards[0]] }
         case DEALER_DRAW_ONE:
-            return {...state, dealerCards: [...state.dealerCards, action.payload.cards] }
+            return {...state, dealerCards: [...state.dealerCards, action.payload.cards[0]] }
         default:
             return state
         }
