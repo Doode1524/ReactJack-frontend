@@ -39,34 +39,6 @@ const Draw = (props) => {
     } 
     }
 
-    // const handleUserValues = () => {
-        
-    //     if (props.userCards) {
-    //         let uValues = props.userCards.map(card => parseInt(card.value)).reduce((a, b) => a + b, 0)
-    //         props.userCards.map((card) => {
-
-    //             if (card.value == "KING" || card.value == "QUEEN" || card.value == "JACK") {
-    //                 card.value = 10
-    //                 return
-
-    //             } else if 
-    //             (card.code == "AC" || card.code == "AS" || card.code == "AH" || card.code == "AD") {
-                        
-    //                     if (uValues > 11) {
-    //                         card.value = 1
-    //                         return
-    //                     } else {
-    //                         card.value = 11
-    //                         return
-    //                     }
-    //                 }
-    //             }
-                
-    //             )
-    //             console.log(uValues, 'uValues')
-    //     }
-    // }
-
     const pushUserValues = () => {
 
         if (props.userCards) {
@@ -158,7 +130,8 @@ const mapStateToProps = (state) => {
         // cards: state.cards, 
         deckId: state.deck.deckId,
         userCards: state.deck.userCards,
-        dealerCards: state.deck.dealerCards
+        dealerCards: state.deck.dealerCards,
+        userCardValues: state.deck.userCardValues
     }
 }
 
@@ -167,3 +140,51 @@ export default connect(mapStateToProps, { drawTwoCards, userDrawOne, dealerDrawO
 
 
 // uValues = props.userCards.map(card => parseInt(card.value)).reduce((a, b) => a + b, 0)
+
+ // const convertValues = () => {
+    //     if (props.userCards){
+    //         props.userCardValues.map(card => {
+    //             if (card == "KING" || card == "QUEEN" || card == "JACK"){
+    //                 card = 10
+    //                 return
+    //             } else if 
+    //                 (card == "ACE"){
+    //                     card = 11
+    //                     return
+    //                 } else {
+    //                     parseInt(card)
+    //                     return
+    //                 }
+    //             }
+    //         )
+    //         return props.userCardValues
+    //     }
+    // }
+
+    // const handleUserValues = () => {
+        
+    //     if (props.userCards) {
+    //         props.userCards.map(card => parseInt(card.value)).reduce((a, b) => a + b, 0)
+    //         props.userCards.map((card) => {
+
+    //             if (card.value == "KING" || card.value == "QUEEN" || card.value == "JACK") {
+    //                 card.value = 10
+    //                 return
+
+    //             } else if 
+    //             (card.code == "AC" || card.code == "AS" || card.code == "AH" || card.code == "AD") {
+                        
+    //                     if (uValues > 11) {
+    //                         card.value = 1
+    //                         return
+    //                     } else {
+    //                         card.value = 11
+    //                         return
+    //                     }
+    //                 }
+    //             }
+                
+    //             )
+    //             console.log(uValues, 'uValues')
+    //     }
+    // }

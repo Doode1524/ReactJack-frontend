@@ -5,14 +5,15 @@ import {
     DEALER_DRAW_ONE
 } from '../actions/types'
 
-const INITIAL_STATE = {deckId: null, userCards: null, dealerCards: null}
+const INITIAL_STATE = {deckId: null, userCards: null, dealerCards: null, userCardValues: null}
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case SHUFFLE:
             return{...state, deckId: action.payload.deck_id}
         case DRAW_TWO:
-            return {...state, userCards: [action.payload.cards[0], action.payload.cards[2]],  dealerCards: [action.payload.cards[1]] }
+            let ucv = [action.payload.cards[0], action.payload.cards[2]].map(card => card.value)
+            return {...state, userCards: [action.payload.cards[0], action.payload.cards[2]],  dealerCards: [action.payload.cards[1]], userCardValues: ucv }
         case USER_DRAW_ONE:
             return {...state, userCards: [...state.userCards, action.payload.cards[0]] }
         case DEALER_DRAW_ONE:
@@ -21,4 +22,6 @@ export default (state = INITIAL_STATE, action) => {
             return state
         }
 }
+
+
         
