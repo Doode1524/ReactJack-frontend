@@ -20,7 +20,6 @@ const Draw = (props) => {
         if (props.userCards){
             v = props.userCards.map(card => card.value);
         
-
         if (v.includes("ACE") && v.includes('KING')) {
           console.log('win') 
         } else if (v.includes("ACE") && v.includes('QUEEN')) {
@@ -52,6 +51,8 @@ const Draw = (props) => {
         })
         console.log(userValues, 'values')
         console.log(aces, 'aces')
+        console.log(userValues.reduce((a, b) => a + b, 0), 'totals')
+        
     }
     }
 
