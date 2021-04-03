@@ -11,11 +11,8 @@ const Draw = (props) => {
     let aces = []
     let v
    
-
-
     const handleDrawTwo = () => {
         dispatch(drawTwoCards(props.deckId))
-        
     }
 
     const checkBlackJack = () => {
@@ -36,6 +33,26 @@ const Draw = (props) => {
           console.log("play")
         }
     } 
+    }
+
+    const pushUserValues = () => {
+
+        if (props.userCards) {
+        props.userCards.map((card) =>  {
+        if (card.value == "KING" || card.value == "QUEEN" || card.value == "JACK") {
+            userValues.push(10);
+            return
+        } else if (card.value == "ACE"){
+            aces.push("ACE")
+            return
+        } else  {
+            userValues.push(parseInt(card.value))
+            return
+        }
+        })
+        console.log(userValues, 'values')
+        console.log(aces, 'aces')
+    }
     }
 
     const handleUserDrawOne = () => {
@@ -60,7 +77,6 @@ const Draw = (props) => {
     const dispatch = useDispatch()
 
     const dealerDrawnCards = () => {
-        checkBlackJack()
         console.log(props.userCards)
         return (
             props.dealerCards && props.dealerCards.map((card, i) => (
@@ -69,6 +85,8 @@ const Draw = (props) => {
     }
 
     const userDrawnCards = () => {
+        checkBlackJack()
+        pushUserValues()
         console.log(props.userCards)
         return (
             props.userCards && props.userCards.map((card, i) => (
