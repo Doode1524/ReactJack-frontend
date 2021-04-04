@@ -9,7 +9,9 @@ import '../cards.css'
 const Draw = (props) => {
 
     let userValues = []
+    let dealerValues = []
     let aces = []
+    let dealerAces = []
     let v
    
     const handleDrawTwo = () => {
@@ -47,18 +49,50 @@ const Draw = (props) => {
             userValues.push(10);
             return
         } else if (card.value == "ACE"){
-            aces.push("ACE")
+            userValues.push(11)
             return
         } else  {
             userValues.push(parseInt(card.value))
             return
         }
         })
+        handleAces()
         console.log(userValues, 'values')
         console.log(aces, 'aces')
         console.log(userValues.reduce((a, b) => a + b, 0), 'totals')
         
     }
+    }
+    
+    const pushDealerValues = () => {
+
+        if (props.dealerCards) {
+        props.dealerCards.map((card) =>  {
+        if (card.value == "KING" || card.value == "QUEEN" || card.value == "JACK") {
+            dealerValues.push(10);
+            return
+        } else if (card.value == "ACE"){
+            dealerValues.push(11)
+            return
+        } else  {
+            dealerValues.push(parseInt(card.value))
+            return
+        }
+        })
+        console.log(dealerValues, ' dealer values')
+        console.log(dealerAces, ' dealer aces')
+        console.log(dealerValues.reduce((a, b) => a + b, 0), 'dealer totals')
+        
+    }
+    }
+    const handleAces = () => {
+        if (userValues.reduce((a, b) => a + b, 0) > 21){
+            userValues.map(card => {
+                if (card == 11) {
+                    card = 1
+                }
+            })
+        }
     }
 
     const handleUserDrawOne = () => {
@@ -87,6 +121,7 @@ const Draw = (props) => {
     const dispatch = useDispatch()
 
     const dealerDrawnCards = () => {
+        pushDealerValues()
         console.log(props.dealerCards, 'dealer cards')
         return (
             props.dealerCards && props.dealerCards.map((card, i) => (
@@ -97,6 +132,8 @@ const Draw = (props) => {
     const userDrawnCards = () => {
         checkBlackJack()
         pushUserValues()
+        handleAces()
+        // debugger
         console.log(props.userCardValues, 'ucv')
         console.log(props.userCards)
         return (
@@ -108,6 +145,9 @@ const Draw = (props) => {
     return (
         <div className ='cards-div'>
             <div>
+                <div>
+                    <h3>Total: {dealerValues.reduce((a, b) => a + b, 0)}</h3>
+                </div>
                 <button className="button" onClick={handleDrawTwo}>Draw</button>
                 <button className="button" onClick={handleShuffle}>Shuffle Deck</button>
                 <div >
