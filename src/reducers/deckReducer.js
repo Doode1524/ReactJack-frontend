@@ -15,7 +15,11 @@ export default (state = INITIAL_STATE, action) => {
             let ucv = [action.payload.cards[0], action.payload.cards[2]].map(card => card.value)
             return {...state, userCards: [action.payload.cards[0], action.payload.cards[2]],  dealerCards: [action.payload.cards[1]], userCardValues: ucv }
         case USER_DRAW_ONE:
-            return {...state, userCards: [...state.userCards, action.payload.cards[0]] }
+            return {
+                    ...state,
+                    userCards: [...state.userCards, action.payload.cards[0]],
+                    userCardValues: [...state.userCardValues, action.payload.cards[0].value] 
+                    }
         case DEALER_DRAW_ONE:
             return {...state, dealerCards: [...state.dealerCards, action.payload.cards[0]] }
         default:

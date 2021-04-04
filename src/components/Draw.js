@@ -77,7 +77,7 @@ const Draw = (props) => {
                 <button className="button" >Split</button>
                 <button className="button" >Double Down</button>
                 <div>
-                    <h3>Total:</h3>
+                    <h3>Total: {userValues.reduce((a, b) => a + b, 0)}</h3>
                 </div>
                 </>
             )
@@ -97,6 +97,7 @@ const Draw = (props) => {
     const userDrawnCards = () => {
         checkBlackJack()
         pushUserValues()
+        console.log(props.userCardValues, 'ucv')
         console.log(props.userCards)
         return (
             props.userCards && props.userCards.map((card, i) => (
@@ -137,27 +138,27 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps, { drawTwoCards, userDrawOne, dealerDrawOne, shuffleDeck })(Draw)
 
 
+// const convertValues = () => {
+//     if (props.userCards){
+//         props.userCardValues.map(card => {
+//             if (card === "KING" || card === "QUEEN" || card === "JACK"){
+//                 card = 10
+//             } else if 
+//                 (card === "ACE"){
+//                     card = 11
+//                 } else {
+//                     parseInt(card)
+//                 }
+//             }
+//         )
+//     }
+//     return props.userCardValues
+// }
+
+
 // uValues = props.userCards.map(card => parseInt(card.value)).reduce((a, b) => a + b, 0)
 
- // const convertValues = () => {
-    //     if (props.userCards){
-    //         props.userCardValues.map(card => {
-    //             if (card == "KING" || card == "QUEEN" || card == "JACK"){
-    //                 card = 10
-    //                 return
-    //             } else if 
-    //                 (card == "ACE"){
-    //                     card = 11
-    //                     return
-    //                 } else {
-    //                     parseInt(card)
-    //                     return
-    //                 }
-    //             }
-    //         )
-    //         return props.userCardValues
-    //     }
-    // }
+
 
     // const handleUserValues = () => {
         
