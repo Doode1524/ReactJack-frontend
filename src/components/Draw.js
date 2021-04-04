@@ -113,7 +113,7 @@ const Draw = (props) => {
                 <button className="button" >Split</button>
                 <button className="button" >Double Down</button>
                 <div>
-                    <h3>Total: {userValues.reduce((a, b) => a + b, 0)} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dealer Total: {dealerValues.reduce((a, b) => a + b, 0)}</h3>
+                    <h3>Total: {userValues.reduce((a, b) => a + b, 0)} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dealer Total: {dealerValues.reduce((a, b) => a + b, 0)} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wallet: ${props.wallet}</h3>
                 </div>
                 </>
             )
@@ -124,7 +124,7 @@ const Draw = (props) => {
 
     const dealerDrawnCards = () => {
         pushDealerValues()
-        if (dealerValues.reduce((a, b) => a + b, 0) < 17 && props.dealerCards.length > 1) {
+        if (props.dealerCards && dealerValues.reduce((a, b) => a + b, 0) < 17 && props.dealerCards.length > 1) {
             props.dealerDrawOne(props.deckId)
         }
 
@@ -173,7 +173,8 @@ const mapStateToProps = (state) => {
         deckId: state.deck.deckId,
         userCards: state.deck.userCards,
         dealerCards: state.deck.dealerCards,
-        userCardValues: state.deck.userCardValues
+        userCardValues: state.deck.userCardValues,
+        wallet: state.user.wallet
     }
 }
 
