@@ -12,8 +12,8 @@ export class Welcome extends Component {
     render() {
         return (
             <div className='cards-div'>
-                <h2>Welcome! Click to get started!</h2>
-                <button><Link to='/play'>Start</Link></button>
+                <h1>Welcome! Click to get started!</h1>
+                <Link to='/play' className='button'>Start</Link>
             </div>
         )
     }

@@ -72,10 +72,10 @@ const Draw = (props) => {
     const buttons = () => {
         if (props.userCards && props.dealerCards) {
             return (
-                <><button onClick={handleUserDrawOne}>Hit Me</button>
-                <button onClick={handleDealerDrawOne}>Stay</button>
-                <button>Split</button>
-                <button>Double Down</button>
+                <><button className="button" onClick={handleUserDrawOne}>Hit Me</button>
+                <button className="button" onClick={handleDealerDrawOne}>Stay</button>
+                <button className="button" >Split</button>
+                <button className="button" >Double Down</button>
                 <div>
                     <h3>Total:</h3>
                 </div>
@@ -107,8 +107,8 @@ const Draw = (props) => {
     return (
         <div className ='cards-div'>
             <div>
-                <button onClick={handleDrawTwo}>Draw</button>
-                <button onClick={handleShuffle}>Shuffle Deck</button>
+                <button className="button" onClick={handleDrawTwo}>Draw</button>
+                <button className="button" onClick={handleShuffle}>Shuffle Deck</button>
                 <div >
                     {dealerDrawnCards()}
                 </div>
