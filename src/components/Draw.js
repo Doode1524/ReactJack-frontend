@@ -100,7 +100,9 @@ const Draw = (props) => {
     }
     
     const handleDealerDrawOne = () => {
-        props.dealerDrawOne(props.deckId)
+        if (dealerValues.reduce((a, b) => a + b, 0) < 17) {
+            props.dealerDrawOne(props.deckId)
+        }
     }
 
     const buttons = () => {
@@ -122,6 +124,10 @@ const Draw = (props) => {
 
     const dealerDrawnCards = () => {
         pushDealerValues()
+        if (dealerValues.reduce((a, b) => a + b, 0) < 17 && props.dealerCards.length > 1) {
+            props.dealerDrawOne(props.deckId)
+        }
+
         console.log(props.dealerCards, 'dealer cards')
         return (
             props.dealerCards && props.dealerCards.map((card, i) => (
