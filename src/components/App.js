@@ -7,6 +7,7 @@ import Welcome from './Welcome'
 import Draw from './Draw'
 import SignUp from './SignUp'
 import SignIn from './SignIn'
+import Footer from './Footer';
 import '../app.css'
 
 const App = () => {
@@ -21,6 +22,7 @@ const App = () => {
                     <Route path='/play' exact component={Draw} />
                 </Switch>
             </div>
+                <Footer />
         </Router>
     )
 }
