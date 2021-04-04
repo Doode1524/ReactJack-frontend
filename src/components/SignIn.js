@@ -81,7 +81,7 @@ function SignUp({createUser}) {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          <h2>Sign Up</h2>
+          <h2>Sign In</h2>
         </Typography>
         <form className={classes.form} noValidate onSubmit={handleSubmit}>
           <TextField
@@ -121,7 +121,7 @@ function SignUp({createUser}) {
             color="primary"
             className={classes.submit}
           >
-            Sign Up
+            Sign In
           </Button>
           <Grid container>
             <Grid item xs>
@@ -130,8 +130,8 @@ function SignUp({createUser}) {
               </Link>
             </Grid>
             <Grid item>
-              <Link to="/" variant="body2">
-                {"Already have an account? Sign In"}
+              <Link to="/new" variant="body2">
+                {"Don't have an account? Sign Up"}
               </Link>
             </Grid>
           </Grid>

@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import Welcome from './Welcome'
 import Draw from './Draw'
 import SignUp from './SignUp'
+import SignIn from './SignIn'
 import '../app.css'
 
 const App = () => {
@@ -14,7 +15,8 @@ const App = () => {
         <Router history={history}>
             <div className='app'>
                 <Switch>
-                    <Route path='/' exact component={SignUp} />
+                    <Route path='/' exact component={SignIn} />
+                    <Route path='/new' exact component={SignUp} />
                     <Route path='/start' exact component={Welcome} />
                     <Route path='/play' exact component={Draw} />
                 </Switch>
