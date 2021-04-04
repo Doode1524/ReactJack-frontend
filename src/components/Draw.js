@@ -111,7 +111,7 @@ const Draw = (props) => {
                 <button className="button" >Split</button>
                 <button className="button" >Double Down</button>
                 <div>
-                    <h3>Total: {userValues.reduce((a, b) => a + b, 0)}</h3>
+                    <h3>Total: {userValues.reduce((a, b) => a + b, 0)} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dealer Total: {dealerValues.reduce((a, b) => a + b, 0)}</h3>
                 </div>
                 </>
             )
@@ -145,9 +145,6 @@ const Draw = (props) => {
     return (
         <div className ='cards-div'>
             <div>
-                <div>
-                    <h3>Total: {dealerValues.reduce((a, b) => a + b, 0)}</h3>
-                </div>
                 <button className="button" onClick={handleDrawTwo}>Draw</button>
                 <button className="button" onClick={handleShuffle}>Shuffle Deck</button>
                 <div >
