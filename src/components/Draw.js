@@ -90,7 +90,7 @@ const Draw = (props) => {
         console.log(props.dealerCards, 'dealer cards')
         return (
             props.dealerCards && props.dealerCards.map((card, i) => (
-                <img src={card.image} key={i} />
+                <img width="200" height="250"  src={card.image} key={i} />
         )))
     }
 
@@ -100,7 +100,7 @@ const Draw = (props) => {
         console.log(props.userCards)
         return (
             props.userCards && props.userCards.map((card, i) => (
-                <img src={card.image} key={i} />
+                <img width="200" height="250" src={card.image} key={i} />
         )))
     }
 
@@ -109,8 +109,6 @@ const Draw = (props) => {
             <div>
                 <button onClick={handleDrawTwo}>Draw</button>
                 <button onClick={handleShuffle}>Shuffle Deck</button>
-            </div>
-            <div>
                 <div >
                     {dealerDrawnCards()}
                 </div>
