@@ -1,6 +1,6 @@
 
 import React from 'react'
-import { drawTwoCards, userDrawOne, dealerDrawOne, shuffleDeck } from '../actions'
+import { drawTwoCards, userDrawOne, dealerDrawOne, shuffleDeck, winningHand } from '../actions'
 import { connect, useDispatch } from 'react-redux'
 import { useState, useEffect } from 'react'
 import '../cards.css'
@@ -103,6 +103,13 @@ const Draw = (props) => {
         if (dealerValues.reduce((a, b) => a + b, 0) < 17) {
             props.dealerDrawOne(props.deckId)
         }
+        handlePayout()
+    }
+
+    const handlePayout = () => {
+        if (dealerValues.reduce((a, b) => a + b, 0) < userValues.reduce((a, b) => a + b, 0)) {
+            dispatch(winningHand(props.wallet))
+        }
     }
 
     const buttons = () => {
@@ -179,7 +186,7 @@ const mapStateToProps = (state) => {
 }
 
 
-export default connect(mapStateToProps, { drawTwoCards, userDrawOne, dealerDrawOne, shuffleDeck })(Draw)
+export default connect(mapStateToProps, { drawTwoCards, userDrawOne, dealerDrawOne, shuffleDeck, winningHand })(Draw)
 
 
 // const convertValues = () => {

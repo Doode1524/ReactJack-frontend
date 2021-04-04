@@ -5,7 +5,8 @@ import {
     DRAW_TWO,
     USER_DRAW_ONE,
     DEALER_DRAW_ONE,
-    CREATE_USER
+    CREATE_USER,
+    WINNING_HAND
 } from './types'
 
 export const shuffleDeck = () => async dispatch => { 
@@ -44,4 +45,10 @@ export const createUser = (user) => async dispatch => {
     dispatch({ type: CREATE_USER, payload: response.data })
     console.log(response.data)
     history.push('/start')  
+}
+
+export const winningHand = (wallet) => async dispatch => { 
+    const response = wallet
+    dispatch({ type: WINNING_HAND, payload: response.data })
+    console.log(response.data, 'new check')
 }
