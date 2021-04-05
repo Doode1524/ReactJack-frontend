@@ -26,7 +26,7 @@ handleSubmit = (event) => {
     }
 axios.post('http://localhost:3001/users', {user}, {withCredentials: true})
     .then(response => {
-      if (response.data.status === 'created') {
+      if (response.statusText === 'Created') {
         this.props.handleLogin(response.data)
         this.redirect()
       } else {
