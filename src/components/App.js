@@ -63,7 +63,7 @@ class App extends React.Component {
             <div className='app'>
                 <Switch>
                     <Route exact path='/' render={props => (
-                        <Home {...props} loggedInStatus={this.state.isLoggedIn}/>
+                        <Home {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.isLoggedIn}/>
                     )} />
                     <Route path='/login' render={props => (
                         <SignIn {...props} handleLogin={this.handleLogin}
