@@ -53,6 +53,10 @@ class App extends React.Component {
         .catch(error => console.log('api errors:', error))
     }
 
+    componentWillMount() {
+        return this.props.loggedInStatus ? this.redirect() : null
+    }
+
     render() {
     return (
         <Router history={history}>
