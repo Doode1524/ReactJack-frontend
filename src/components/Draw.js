@@ -1,6 +1,6 @@
 
 import React from 'react'
-import { drawTwoCards, userDrawOne, dealerDrawOne, shuffleDeck, winningHand } from '../actions'
+import { drawTwoCards, userDrawOne, dealerDrawOne, shuffleDeck, winningHand, payBlackjack } from '../actions'
 import { connect, useDispatch } from 'react-redux'
 import { useState, useEffect } from 'react'
 import '../cards.css'
@@ -16,6 +16,7 @@ const Draw = (props) => {
    
     const handleDrawTwo = () => {
         dispatch(drawTwoCards(props.deckId))
+        checkBlackJack()
     }
 
     const handleShuffle = () => {
@@ -28,13 +29,13 @@ const Draw = (props) => {
             v = props.userCards.map(card => card.value);
         
         if (v.includes("ACE") && v.includes('KING')) {
-          console.log('win') 
+          dispatch(payBlackjack(props.wallet)) 
         } else if (v.includes("ACE") && v.includes('QUEEN')) {
-          console.log('win') 
+          dispatch(payBlackjack(props.wallet)) 
         } else if (v.includes("ACE") && v.includes('JACK')) {
-          console.log('win') 
+          dispatch(payBlackjack(props.wallet)) 
         } else if (v.includes("ACE") && v.includes("10")) {
-          console.log('win')
+          dispatch(payBlackjack(props.wallet))
         } else {
           console.log("play")
         }
@@ -161,7 +162,6 @@ const Draw = (props) => {
     }
 
     const userDrawnCards = () => {
-        checkBlackJack()
         // pushUserValues()
         handleAces()
         // debugger
@@ -205,7 +205,7 @@ const mapStateToProps = (state) => {
 }
 
 
-export default connect(mapStateToProps, { drawTwoCards, userDrawOne, dealerDrawOne, shuffleDeck, winningHand })(Draw)
+export default connect(mapStateToProps, { drawTwoCards, userDrawOne, dealerDrawOne, shuffleDeck, winningHand, payBlackjack })(Draw)
 
 
 // const convertValues = () => {

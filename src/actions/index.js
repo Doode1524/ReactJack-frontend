@@ -6,8 +6,11 @@ import {
     USER_DRAW_ONE,
     DEALER_DRAW_ONE,
     CREATE_USER,
-    WINNING_HAND
+    WINNING_HAND,
+    PAY_BLACKJACK
 } from './types'
+
+export const payBlackjack = (wallet) => ({type: PAY_BLACKJACK, payload: wallet})
 
 export const shuffleDeck = () => async dispatch => { 
     const response = await axios.get('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=6')
@@ -19,7 +22,7 @@ export const drawTwoCards = (deckId) => async dispatch => {
     const response = await axios.get(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=3`)
     dispatch({ type: DRAW_TWO, payload: response.data })
     // debugger
-    // console.log(response.data)
+    // console.log(response.data, 'draw2')
 
 }
 
