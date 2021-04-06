@@ -7,11 +7,13 @@ import {
     DEALER_DRAW_ONE,
     CREATE_USER,
     WINNING_HAND,
-    PAY_BLACKJACK
+    PAY_BLACKJACK,
+    PUSH_PAYOUT
 } from './types'
 
 export const payBlackjack = (wallet) => ({type: PAY_BLACKJACK, payload: wallet})
 export const winningHand = (wallet) => ({type: WINNING_HAND, payload: wallet})
+export const pushPayout = (wallet) => ({type: PUSH_PAYOUT, payload: wallet})
 
 export const shuffleDeck = () => async dispatch => { 
     const response = await axios.get('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=6')

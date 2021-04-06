@@ -1,6 +1,6 @@
 
 import React from 'react'
-import { drawTwoCards, userDrawOne, dealerDrawOne, shuffleDeck, winningHand, payBlackjack } from '../actions'
+import { drawTwoCards, userDrawOne, dealerDrawOne, shuffleDeck, winningHand, payBlackjack, pushPayout } from '../actions'
 import { connect, useDispatch } from 'react-redux'
 import { useState, useEffect } from 'react'
 import '../cards.css'
@@ -16,6 +16,7 @@ const Draw = (props) => {
    
     const handleDrawTwo = () => {
         handlePayout()
+        handlePush()
         dispatch(drawTwoCards(props.deckId))
         checkBlackJack()
     }
@@ -126,8 +127,14 @@ const Draw = (props) => {
     }
 
     const handlePayout = () => {
-        if (dealerValues.reduce((a, b) => a + b, 0) < userValues.reduce((a, b) => a + b, 0) || (dealerValues.reduce((a, b) => a + b, 0) > 21 && userValues.reduce((a, b) => a + b, 0) < 22)) {
+        if ((dealerValues.reduce((a, b) => a + b, 0) < userValues.reduce((a, b) => a + b, 0) && userValues.reduce((a, b) => a + b, 0) < 22) || (dealerValues.reduce((a, b) => a + b, 0) > 21 && userValues.reduce((a, b) => a + b, 0) < 22) || (dealerValues.reduce((a, b) => a + b, 0) < userValues.reduce((a, b) => a + b, 0) && userValues.reduce((a, b) => a + b, 0) < 22)) {
             dispatch(winningHand(props.wallet))
+        }
+    }
+
+    const handlePush = () => {
+        if (dealerValues.reduce((a, b) => a + b, 0) == userValues.reduce((a, b) => a + b, 0) && props.userCards && props.dealerCards) {
+            dispatch(pushPayout(props.wallet))
         }
     }
 
@@ -154,7 +161,7 @@ const Draw = (props) => {
         if (props.dealerCards && dealerValues.reduce((a, b) => a + b, 0) < 17 && props.dealerCards.length > 1 && dealerValues.reduce((a, b) => a + b, 0) <= userValues.reduce((a, b) => a + b, 0)) {
             props.dealerDrawOne(props.deckId)
         }
-        
+       
         console.log(props.dealerCards, 'dealer cards')
         return (
             props.dealerCards && props.dealerCards.map((card, i) => (
@@ -163,9 +170,7 @@ const Draw = (props) => {
     }
 
     const userDrawnCards = () => {
-        // pushUserValues()
         handleAces()
-        // debugger
         console.log(props.userCardValues, 'ucv')
         console.log(props.userCards)
         return (
@@ -206,7 +211,7 @@ const mapStateToProps = (state) => {
 }
 
 
-export default connect(mapStateToProps, { drawTwoCards, userDrawOne, dealerDrawOne, shuffleDeck, winningHand, payBlackjack })(Draw)
+export default connect(mapStateToProps, { drawTwoCards, userDrawOne, dealerDrawOne, shuffleDeck, winningHand, payBlackjack, pushPayout })(Draw)
 
 
 // const convertValues = () => {
