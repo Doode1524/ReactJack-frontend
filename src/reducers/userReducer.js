@@ -15,7 +15,7 @@ export default (state = INITIAL_STATE, action) => {
         case DRAW_TWO:
             return{...state, wallet: [state.wallet - 5]}
         case PAY_BLACKJACK:
-            return{...state, wallet: [state.wallet[0] + 12.5]}
+            return{...state, wallet: [state.wallet[0] + 2.5]}
         case WINNING_HAND:
             return{...state, wallet: [state.wallet[0] + 10]}
         case PUSH_PAYOUT:

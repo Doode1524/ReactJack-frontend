@@ -15,10 +15,10 @@ const Draw = (props) => {
     let v
    
     const handleDrawTwo = () => {
+        checkBlackJack()
         handlePayout()
         handlePush()
         dispatch(drawTwoCards(props.deckId))
-        checkBlackJack()
     }
 
     const handleShuffle = () => {
