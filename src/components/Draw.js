@@ -75,9 +75,11 @@ const Draw = (props) => {
     const handleAces = () => {
         console.log('handle aces', userValues.reduce((a, b) => a + b, 0))
         if (userValues.reduce((a, b) => a + b, 0) > 21){
+            let toggleAce = false
             userValues.map((card, i) => {
-                if (card == 11) {
+                if (card == 11 && !toggleAce) {
                     userValues[i] = 1
+                    toggleAce = true
                 }
             })
         }
