@@ -42,26 +42,42 @@ const Draw = (props) => {
     }
 
     const pushUserValues = () => {
-
-        if (props.userCards) {
-        props.userCards.map((card) =>  {
-        if (card.value == "KING" || card.value == "QUEEN" || card.value == "JACK") {
+      if (props.userCards) {
+        props.userCards.map((card) => {
+          if (
+            card.value == "KING" ||
+            card.value == "QUEEN" ||
+            card.value == "JACK"
+          ) {
             userValues.push(10);
-            return
-        } else if (card.value == "ACE"){
-            userValues.push(11)
-            return
-        } else  {
-            userValues.push(parseInt(card.value))
-            return
+            return;
+          } else if (card.value == "ACE") {
+            userValues.push(11);
+            return;
+          } else {
+            userValues.push(parseInt(card.value));
+            return;
+          }
+        });
+        handleAces();
+        console.log(userValues, "values");
+        console.log(aces, "aces");
+        console.log(
+          userValues.reduce((a, b) => a + b, 0),
+          "totals"
+        );
+      }
+    };
+
+    const handleAces = () => {
+        console.log('handle aces', userValues.reduce((a, b) => a + b, 0))
+        if (userValues.reduce((a, b) => a + b, 0) > 21){
+            userValues.map((card, i) => {
+                if (card == 11) {
+                    userValues[i] = 1
+                }
+            })
         }
-        })
-        handleAces()
-        console.log(userValues, 'values')
-        console.log(aces, 'aces')
-        console.log(userValues.reduce((a, b) => a + b, 0), 'totals')
-        
-    }
     }
     
     const pushDealerValues = () => {
@@ -84,15 +100,6 @@ const Draw = (props) => {
         console.log(dealerValues.reduce((a, b) => a + b, 0), 'dealer totals')
         
     }
-    }
-    const handleAces = () => {
-        if (userValues.reduce((a, b) => a + b, 0) > 21){
-            userValues.map(card => {
-                if (card == 11) {
-                    card = 1
-                }
-            })
-        }
     }
 
     const handleUserDrawOne = () => {
