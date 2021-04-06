@@ -134,11 +134,10 @@ const Draw = (props) => {
         }
     }
 
-    const dispatch = useDispatch()
-
     const dealerDrawnCards = () => {
+        pushUserValues()
         pushDealerValues()
-        if (props.dealerCards && dealerValues.reduce((a, b) => a + b, 0) < 17 && props.dealerCards.length > 1) {
+        if (props.dealerCards && dealerValues.reduce((a, b) => a + b, 0) < 17 && props.dealerCards.length > 1 && dealerValues.reduce((a, b) => a + b, 0) < userValues.reduce((a, b) => a + b, 0)) {
             props.dealerDrawOne(props.deckId)
         }
 
@@ -151,7 +150,7 @@ const Draw = (props) => {
 
     const userDrawnCards = () => {
         checkBlackJack()
-        pushUserValues()
+        // pushUserValues()
         handleAces()
         // debugger
         console.log(props.userCardValues, 'ucv')
@@ -161,6 +160,7 @@ const Draw = (props) => {
                 <img width="200" height="250" src={card.image} key={i} />
         )))
     }
+    const dispatch = useDispatch()
 
     return (
         <div className ='cards-div'>
