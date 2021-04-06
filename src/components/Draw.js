@@ -80,6 +80,17 @@ const Draw = (props) => {
         }
     }
     
+    const handleDealerAces = () => {
+        console.log('handle aces', dealerValues.reduce((a, b) => a + b, 0))
+        if (dealerValues.reduce((a, b) => a + b, 0) > 21){
+            dealerValues.map((card, i) => {
+                if (card == 11) {
+                    dealerValues[i] = 1
+                }
+            })
+        }
+    }
+
     const pushDealerValues = () => {
 
         if (props.dealerCards) {
@@ -137,6 +148,7 @@ const Draw = (props) => {
     const dealerDrawnCards = () => {
         pushUserValues()
         pushDealerValues()
+        handleDealerAces()
         if (props.dealerCards && dealerValues.reduce((a, b) => a + b, 0) < 17 && props.dealerCards.length > 1 && dealerValues.reduce((a, b) => a + b, 0) < userValues.reduce((a, b) => a + b, 0)) {
             props.dealerDrawOne(props.deckId)
         }
