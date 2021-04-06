@@ -15,6 +15,7 @@ const Draw = (props) => {
     let v
    
     const handleDrawTwo = () => {
+        handlePayout()
         dispatch(drawTwoCards(props.deckId))
         checkBlackJack()
     }
@@ -25,7 +26,7 @@ const Draw = (props) => {
 
     const checkBlackJack = () => {
 
-        if (props.userCards){
+        if (props.userCards && props.userCards.length < 3){
             v = props.userCards.map(card => card.value);
         
         if (v.includes("ACE") && v.includes('KING')) {
@@ -122,11 +123,10 @@ const Draw = (props) => {
         if (dealerValues.reduce((a, b) => a + b, 0) < 17) {
             props.dealerDrawOne(props.deckId)
         }
-        handlePayout()
     }
 
     const handlePayout = () => {
-        if (dealerValues.reduce((a, b) => a + b, 0) < userValues.reduce((a, b) => a + b, 0)) {
+        if (dealerValues.reduce((a, b) => a + b, 0) < userValues.reduce((a, b) => a + b, 0) || (dealerValues.reduce((a, b) => a + b, 0) > 21 && userValues.reduce((a, b) => a + b, 0) < 22)) {
             dispatch(winningHand(props.wallet))
         }
     }
@@ -150,10 +150,11 @@ const Draw = (props) => {
         pushUserValues()
         pushDealerValues()
         handleDealerAces()
-        if (props.dealerCards && dealerValues.reduce((a, b) => a + b, 0) < 17 && props.dealerCards.length > 1 && dealerValues.reduce((a, b) => a + b, 0) < userValues.reduce((a, b) => a + b, 0)) {
+        
+        if (props.dealerCards && dealerValues.reduce((a, b) => a + b, 0) < 17 && props.dealerCards.length > 1 && dealerValues.reduce((a, b) => a + b, 0) <= userValues.reduce((a, b) => a + b, 0)) {
             props.dealerDrawOne(props.deckId)
         }
-
+        
         console.log(props.dealerCards, 'dealer cards')
         return (
             props.dealerCards && props.dealerCards.map((card, i) => (

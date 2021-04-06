@@ -11,6 +11,7 @@ import {
 } from './types'
 
 export const payBlackjack = (wallet) => ({type: PAY_BLACKJACK, payload: wallet})
+export const winningHand = (wallet) => ({type: WINNING_HAND, payload: wallet})
 
 export const shuffleDeck = () => async dispatch => { 
     const response = await axios.get('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=6')
@@ -50,8 +51,3 @@ export const createUser = (user) => async dispatch => {
     history.push('/start')  
 }
 
-export const winningHand = (wallet) => async dispatch => { 
-    const response = wallet
-    dispatch({ type: WINNING_HAND, payload: response.data })
-    console.log(response.data, 'new check')
-}

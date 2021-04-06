@@ -1,7 +1,8 @@
 import {
     CREATE_USER,
     DRAW_TWO,
-    PAY_BLACKJACK
+    PAY_BLACKJACK,
+    WINNING_HAND
 } from '../actions/types'
 
 const INITIAL_STATE = {user: null, wallet: 100}
@@ -14,6 +15,8 @@ export default (state = INITIAL_STATE, action) => {
             return{...state, wallet: [state.wallet - 5]}
         case PAY_BLACKJACK:
             return{...state, wallet: [state.wallet[0] + 12.5]}
+        case WINNING_HAND:
+            return{...state, wallet: [state.wallet[0] + 10]}
         default:
             return state
     }
