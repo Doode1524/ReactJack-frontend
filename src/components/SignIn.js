@@ -51,28 +51,11 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(3, 0, 2),
   },
 }));
+const classes = useStyles();
 
-function SignUp({createUser}) {
-  const classes = useStyles();
+class SignUp extends React.Compnent {
 
-  const [user, setUser] = useState({
-    email: "",
-    password: ""
-  })
-  
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    console.log(user)
-    createUser(user)
-  }
-
-  const handleChange = (event) => {
-    setUser({
-      ...user, [event.target.name]: event.target.value
-    })
-    console.log(event.target.value)
-  }
-
+  render() {
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -142,6 +125,7 @@ function SignUp({createUser}) {
       </Box>
     </Container>
   );
+  }
 }
 
 const mapStateToProps = (state) => {
