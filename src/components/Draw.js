@@ -15,6 +15,7 @@ const Draw = (props) => {
         checkBlackJack()
         handlePayout()
         handlePush()
+        
         dispatch(drawTwoCards(props.deckId))
     }
 
@@ -136,7 +137,11 @@ const Draw = (props) => {
     const handlePush = () => {
         if (dealerValues.reduce((a, b) => a + b, 0) == userValues.reduce((a, b) => a + b, 0) && props.userCards && props.dealerCards) {
             dispatch(pushPayout(props.wallet))
+            if (props.toggleDouble == true) {
+                dispatch(pushPayout(props.wallet))
+            }
         }
+        dispatch(togDouble(props.toggleDouble))
     }
 
     const buttons = () => {
