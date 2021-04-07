@@ -15,7 +15,11 @@ const Draw = (props) => {
         checkBlackJack()
         handlePayout()
         handlePush()
-        
+
+        if (props.deck && props.deck.remaining < 10) {
+            props.shuffleDeck()
+        }
+
         dispatch(drawTwoCards(props.deckId))
     }
 
@@ -204,6 +208,7 @@ const Draw = (props) => {
 
 const mapStateToProps = (state) => {
     return {
+        deck: state.deck.deck,
         deckId: state.deck.deckId,
         userCards: state.deck.userCards,
         dealerCards: state.deck.dealerCards,
