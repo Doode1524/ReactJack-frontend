@@ -1,19 +1,16 @@
 
 import React from 'react'
-import { drawTwoCards, userDrawOne, dealerDrawOne, shuffleDeck, winningHand, payBlackjack, pushPayout } from '../actions'
+import { drawTwoCards, userDrawOne, dealerDrawOne, shuffleDeck, winningHand, payBlackjack, pushPayout, payDouble, winDouble, togDouble } from '../actions'
 import { connect, useDispatch } from 'react-redux'
 import { useState, useEffect } from 'react'
 import '../cards.css'
-// import Options from './Options'
 
 const Draw = (props) => {
 
     let userValues = []
     let dealerValues = []
-    let aces = []
-    let dealerAces = []
     let v
-   
+
     const handleDrawTwo = () => {
         checkBlackJack()
         handlePayout()
@@ -39,7 +36,7 @@ const Draw = (props) => {
         } else if (v.includes("ACE") && v.includes("10")) {
           dispatch(payBlackjack(props.wallet))
         } else {
-          console.log("play")
+       
         }
     } 
     }
@@ -63,17 +60,11 @@ const Draw = (props) => {
           }
         });
         handleAces();
-        console.log(userValues, "values");
-        console.log(aces, "aces");
-        console.log(
-          userValues.reduce((a, b) => a + b, 0),
-          "totals"
-        );
       }
     };
 
     const handleAces = () => {
-        console.log('handle aces', userValues.reduce((a, b) => a + b, 0))
+
         if (userValues.reduce((a, b) => a + b, 0) > 21){
             let toggleAce = false
             userValues.map((card, i) => {
@@ -86,7 +77,7 @@ const Draw = (props) => {
     }
     
     const handleDealerAces = () => {
-        console.log('handle aces', dealerValues.reduce((a, b) => a + b, 0))
+
         if (dealerValues.reduce((a, b) => a + b, 0) > 21){
             dealerValues.map((card, i) => {
                 if (card == 11) {
@@ -110,11 +101,7 @@ const Draw = (props) => {
             dealerValues.push(parseInt(card.value))
             return
         }
-        })
-        console.log(dealerValues, ' dealer values')
-        console.log(dealerAces, ' dealer aces')
-        console.log(dealerValues.reduce((a, b) => a + b, 0), 'dealer totals')
-        
+        })      
     }
     }
 
@@ -128,10 +115,22 @@ const Draw = (props) => {
         }
     }
 
+    const handleDouble = async () => {
+        dispatch(payDouble(props.wallet))
+        await props.userDrawOne(props.deckId)
+        if (dealerValues.reduce((a, b) => a + b, 0) < 17) {
+            await props.dealerDrawOne(props.deckId)
+        }
+    }
+
     const handlePayout = () => {
         if ((dealerValues.reduce((a, b) => a + b, 0) < userValues.reduce((a, b) => a + b, 0) && userValues.reduce((a, b) => a + b, 0) < 22) || (dealerValues.reduce((a, b) => a + b, 0) > 21 && userValues.reduce((a, b) => a + b, 0) < 22) || (dealerValues.reduce((a, b) => a + b, 0) < userValues.reduce((a, b) => a + b, 0) && userValues.reduce((a, b) => a + b, 0) < 22)) {
             dispatch(winningHand(props.wallet))
+            if (props.toggleDouble == true) {
+                dispatch(winDouble(props.wallet))
+            }
         }
+        dispatch(togDouble(props.toggleDouble))
     }
 
     const handlePush = () => {
@@ -146,7 +145,7 @@ const Draw = (props) => {
                 <><button className="button" onClick={handleUserDrawOne}>Hit Me</button>
                 <button className="button" onClick={handleDealerDrawOne}>Stay</button>
                 <button className="button" >Split</button>
-                <button className="button" >Double Down</button>
+                <button className="button" onClick={handleDouble}>Double Down</button>
                 <div>
                     <h3>Total: {userValues.reduce((a, b) => a + b, 0)} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dealer Total: {dealerValues.reduce((a, b) => a + b, 0)} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wallet: ${props.wallet}</h3>
                 </div>
@@ -159,12 +158,11 @@ const Draw = (props) => {
         pushUserValues()
         pushDealerValues()
         handleDealerAces()
-        
+     
         if (props.dealerCards && dealerValues.reduce((a, b) => a + b, 0) < 17 && props.dealerCards.length > 1 && dealerValues.reduce((a, b) => a + b, 0) <= userValues.reduce((a, b) => a + b, 0)) {
             props.dealerDrawOne(props.deckId)
         }
        
-        console.log(props.dealerCards, 'dealer cards')
         return (
             props.dealerCards && props.dealerCards.map((card, i) => (
                 <img width="200" height="250"  src={card.image} key={i} />
@@ -173,8 +171,7 @@ const Draw = (props) => {
 
     const userDrawnCards = () => {
         handleAces()
-        console.log(props.userCardValues, 'ucv')
-        console.log(props.userCards)
+   
         return (
             props.userCards && props.userCards.map((card, i) => (
                 <img width="200" height="250" src={card.image} key={i} />
@@ -193,7 +190,6 @@ const Draw = (props) => {
                     {userDrawnCards()}
                 <div>
                     {buttons()}
-                    {/* <Options /> */}
                 </div>
             </div>
         </div>
@@ -203,65 +199,13 @@ const Draw = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        // cards: state.cards, 
         deckId: state.deck.deckId,
         userCards: state.deck.userCards,
         dealerCards: state.deck.dealerCards,
         userCardValues: state.deck.userCardValues,
-        wallet: state.user.wallet
+        wallet: state.user.wallet,
+        toggleDouble: state.user.toggleDouble
     }
 }
 
-
-export default connect(mapStateToProps, { drawTwoCards, userDrawOne, dealerDrawOne, shuffleDeck, winningHand, payBlackjack, pushPayout })(Draw)
-
-
-// const convertValues = () => {
-//     if (props.userCards){
-//         props.userCardValues.map(card => {
-//             if (card === "KING" || card === "QUEEN" || card === "JACK"){
-//                 card = 10
-//             } else if 
-//                 (card === "ACE"){
-//                     card = 11
-//                 } else {
-//                     parseInt(card)
-//                 }
-//             }
-//         )
-//     }
-//     return props.userCardValues
-// }
-
-
-// uValues = props.userCards.map(card => parseInt(card.value)).reduce((a, b) => a + b, 0)
-
-
-
-    // const handleUserValues = () => {
-        
-    //     if (props.userCards) {
-    //         props.userCards.map(card => parseInt(card.value)).reduce((a, b) => a + b, 0)
-    //         props.userCards.map((card) => {
-
-    //             if (card.value == "KING" || card.value == "QUEEN" || card.value == "JACK") {
-    //                 card.value = 10
-    //                 return
-
-    //             } else if 
-    //             (card.code == "AC" || card.code == "AS" || card.code == "AH" || card.code == "AD") {
-                        
-    //                     if (uValues > 11) {
-    //                         card.value = 1
-    //                         return
-    //                     } else {
-    //                         card.value = 11
-    //                         return
-    //                     }
-    //                 }
-    //             }
-                
-    //             )
-    //             console.log(uValues, 'uValues')
-    //     }
-    // }
+export default connect(mapStateToProps, { drawTwoCards, userDrawOne, dealerDrawOne, shuffleDeck, winningHand, payBlackjack, pushPayout, payDouble, winDouble, togDouble })(Draw)
