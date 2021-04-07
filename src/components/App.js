@@ -37,6 +37,7 @@ class App extends React.Component {
             isLoggedIn: false,
             user: {}
         })
+        history.push('/')
     }
 
     loginStatus = () => {

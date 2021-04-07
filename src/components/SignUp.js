@@ -54,9 +54,9 @@ redirect = () => {
 render() {
     const {email, password, password_confirmation} = this.state
 return (
-      <div>
+      <div className="cards-div">
         <h1>Sign Up</h1>
-       <form onSubmit={this.handleSubmit}>
+       <form className="form-style-7" onSubmit={this.handleSubmit}>
           <input
             placeholder="email"
             type="text"
@@ -79,7 +79,7 @@ return (
             onChange={this.handleChange}
           />
         
-          <button placeholder="submit" type="submit">
+          <button className="button" placeholder="submit" type="submit">
             Sign Up
           </button>
       
