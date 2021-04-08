@@ -7,7 +7,8 @@ import {
     PUSH_PAYOUT,
     PAY_DOUBLE,
     WIN_DOUBLE,
-    TOGGLE_DOUBLE
+    TOGGLE_DOUBLE,
+    USER_WALLET
 } from '../actions/types'
 
 const INITIAL_STATE = {user: {}, wallet: 100, toggleDouble: false}
@@ -16,6 +17,8 @@ export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case CURRENT_USER:
             return{...state, user: action.payload}
+        case USER_WALLET:
+            return{...state, [state.wallet]: action.payload}
         case DRAW_TWO:
             return{...state, wallet: [state.wallet - 5]}
         case PAY_BLACKJACK:

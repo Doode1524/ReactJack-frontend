@@ -12,7 +12,8 @@ import {
     PUSH_PAYOUT,
     PAY_DOUBLE,
     WIN_DOUBLE,
-    TOGGLE_DOUBLE
+    TOGGLE_DOUBLE,
+    USER_WALLET
 } from './types'
 
 export const payBlackjack = (wallet) => ({type: PAY_BLACKJACK, payload: wallet})
@@ -22,6 +23,7 @@ export const payDouble = (wallet) => ({type: PAY_DOUBLE, payload: wallet})
 export const winDouble = (wallet) => ({type: WIN_DOUBLE, payload: wallet})
 export const togDouble = (wallet) => ({type: TOGGLE_DOUBLE, payload: wallet})
 export const currentUser = (user) => ({type: CURRENT_USER, payload: user})
+export const userWallet = (wallet) => ({type: USER_WALLET, payload: wallet})
 
 export const shuffleDeck = () => async dispatch => { 
     const response = await axios.get('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=6')

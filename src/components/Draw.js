@@ -1,7 +1,7 @@
 
 import React from 'react'
 import Home from './Home'
-import { drawTwoCards, userDrawOne, dealerDrawOne, shuffleDeck, winningHand, payBlackjack, pushPayout, payDouble, winDouble, togDouble } from '../actions'
+import { drawTwoCards, userDrawOne, dealerDrawOne, shuffleDeck, winningHand, payBlackjack, pushPayout, payDouble, winDouble, togDouble, currentUser } from '../actions'
 import { connect, useDispatch } from 'react-redux'
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
@@ -195,14 +195,14 @@ const Draw = (props) => {
             <div>
                 <button className="button" onClick={handleDrawTwo}>Draw</button>
                 <button className="button" onClick={handleShuffle}>Shuffle Deck</button>
-                <button className="button" onClick={() => props.handleClick()}>Log Out</button>
+                <button className="button" onClick={ async () => { await props.handlePatch(); await props.handleClick();}}>Log Out</button>
      
                 <div >
                     {dealerDrawnCards()}
                 </div>
                     {userDrawnCards()}
                 <div>
-                    {buttons()}
+                    {buttons()} 
                 </div>
             </div>
         </div>
@@ -222,4 +222,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { drawTwoCards, userDrawOne, dealerDrawOne, shuffleDeck, winningHand, payBlackjack, pushPayout, payDouble, winDouble, togDouble })(Draw)
+export default connect(mapStateToProps, { drawTwoCards, userDrawOne, dealerDrawOne, shuffleDeck, winningHand, payBlackjack, pushPayout, payDouble, winDouble, togDouble, currentUser })(Draw)

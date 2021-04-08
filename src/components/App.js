@@ -1,7 +1,7 @@
 import React from 'react'
 import history from '../history'
 import { Router, Route, Switch } from 'react-router-dom'
-import { shuffleDeck, currentUser } from '../actions'
+import { shuffleDeck, currentUser, userWallet } from '../actions'
 import { connect } from 'react-redux'
 import Welcome from './Welcome'
 import Draw from './Draw'
@@ -25,15 +25,30 @@ class App extends React.Component {
         this.loginStatus()
     }
 
-    handleClick = () => {
+    handleClick = async () => {
         axios
           .delete("http://localhost:3001/logout", { withCredentials: true })
           .then((response) => {
             this.handleLogout();
-            this.history.push("/");
+            history.push("/");
           })
           .catch((error) => console.log(error));
-    };
+        };
+        
+         handlePatch = async () => {
+            this.props.userWallet(this.props.wallet[0])
+            let user = {
+                wallet: this.props.wallet[0]
+              }
+
+            axios
+              .patch("http://localhost:3001/users/" + this.state.user.id, {user}, { withCredentials: true })
+              .then((response) => {
+                this.handleLogout();
+                history.push("/");
+              })
+              .catch((error) => console.log(error));
+        }
 
     handleLogin = (data) => {
         this.setState ({
@@ -41,6 +56,7 @@ class App extends React.Component {
             user: data.user
         })
         this.props.currentUser(this.state.user)
+        
     }
 
     handleLogout = () => {
@@ -87,7 +103,7 @@ class App extends React.Component {
                     )} />
                     <Route path='/start' exact component={Welcome} />
                     <Route exact path='/play' render={props => (
-                        <Draw {...props} handleLogout={this.handleLogout} handleClick={this.handleClick}
+                        <Draw {...props} handleLogout={this.handleLogout} handleClick={this.handleClick} handlePatch={this.handlePatch}
                         loggedInStatus={this.state.isLoggedIn} />
                     )} />
                 </Switch>
@@ -98,4 +114,11 @@ class App extends React.Component {
     }
 }
 
-export default connect(null, { shuffleDeck, currentUser })(App)
+
+const mapStateToProps = (state) => {
+    return {
+        wallet: state.user.wallet,
+    }
+}
+
+export default connect(mapStateToProps, { shuffleDeck, currentUser, userWallet })(App)
