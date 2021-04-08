@@ -18,7 +18,7 @@ export default (state = INITIAL_STATE, action) => {
         case CURRENT_USER:
             return{...state, user: action.payload}
         case USER_WALLET:
-            return{...state, [state.wallet]: action.payload}
+            return{...state, [state.wallet]: action.payload[0]}
         case DRAW_TWO:
             return{...state, wallet: [state.wallet - 5]}
         case PAY_BLACKJACK:

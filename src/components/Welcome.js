@@ -20,7 +20,9 @@ export class Welcome extends Component {
 }
 
 const mapStateToProps = (state) => {
-    return {deckId: state.deckId}
+    return {
+        deckId: state.deckId
+    }
 }
 
 export default connect(mapStateToProps, {shuffleDeck, drawTwoCards})(Welcome)
