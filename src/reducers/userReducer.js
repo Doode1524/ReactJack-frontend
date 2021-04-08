@@ -16,7 +16,7 @@ const INITIAL_STATE = {user: {}, wallet: 100, toggleDouble: false}
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case CURRENT_USER:
-            return{...state, user: action.payload}
+            return{...state, user: action.payload, wallet: action.payload.wallet}
         case USER_WALLET:
             return{...state, [state.wallet]: action.payload[0]}
         case DRAW_TWO:

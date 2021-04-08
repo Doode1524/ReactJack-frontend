@@ -56,7 +56,6 @@ class App extends React.Component {
             user: data.user
         })
         this.props.currentUser(this.state.user)
-        
     }
 
     handleLogout = () => {
