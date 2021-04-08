@@ -2,20 +2,21 @@ import React, { Component } from 'react';
 import axios from 'axios'
 import {Link} from 'react-router-dom'
 class Login extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { 
-      email: '',
-      password: '',
-      errors: ''
-     };
-  }
-handleChange = (event) => {
+    constructor(props) {
+      super(props);
+      this.state = { 
+        email: '',
+        password: '',
+        errors: ''
+      };
+    }
+    handleChange = (event) => {
     const {name, value} = event.target
     this.setState({
       [name]: value
     })
   };
+
 handleSubmit = (event) => {
     event.preventDefault()
     const {email, password} = this.state
@@ -37,6 +38,7 @@ axios.post('http://localhost:3001/login', {user}, {withCredentials: true})
     })
     .catch(error => console.log('api errors:', error))
   };
+
 redirect = () => {
     this.props.history.push('/start')
   }
