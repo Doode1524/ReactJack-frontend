@@ -1,8 +1,10 @@
 
 import React from 'react'
+import Home from './Home'
 import { drawTwoCards, userDrawOne, dealerDrawOne, shuffleDeck, winningHand, payBlackjack, pushPayout, payDouble, winDouble, togDouble } from '../actions'
 import { connect, useDispatch } from 'react-redux'
 import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import '../cards.css'
 
 const Draw = (props) => {
@@ -193,6 +195,8 @@ const Draw = (props) => {
             <div>
                 <button className="button" onClick={handleDrawTwo}>Draw</button>
                 <button className="button" onClick={handleShuffle}>Shuffle Deck</button>
+                <button className="button" onClick={() => props.handleClick()}>Log Out</button>
+     
                 <div >
                     {dealerDrawnCards()}
                 </div>

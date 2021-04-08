@@ -19,7 +19,7 @@ handleChange = (event) => {
 handleSubmit = (event) => {
     event.preventDefault()
     const {email, password} = this.state
-let user = {
+    let user = {
       email: email,
       password: password
     }

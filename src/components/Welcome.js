@@ -8,7 +8,7 @@ export class Welcome extends Component {
     componentDidMount() {
         this.props.shuffleDeck()
     }
-
+    
     render() {
         return (
             <div className='cards-div'>

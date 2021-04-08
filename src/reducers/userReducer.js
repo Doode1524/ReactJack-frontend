@@ -1,5 +1,6 @@
 import {
     CREATE_USER,
+    CURRENT_USER,
     DRAW_TWO,
     PAY_BLACKJACK,
     WINNING_HAND,
@@ -9,11 +10,11 @@ import {
     TOGGLE_DOUBLE
 } from '../actions/types'
 
-const INITIAL_STATE = {user: null, wallet: 100, toggleDouble: false}
+const INITIAL_STATE = {user: {}, wallet: 100, toggleDouble: false}
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
-        case CREATE_USER:
+        case CURRENT_USER:
             return{...state, user: action.payload}
         case DRAW_TWO:
             return{...state, wallet: [state.wallet - 5]}

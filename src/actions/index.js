@@ -6,6 +6,7 @@ import {
     USER_DRAW_ONE,
     DEALER_DRAW_ONE,
     CREATE_USER,
+    CURRENT_USER,
     WINNING_HAND,
     PAY_BLACKJACK,
     PUSH_PAYOUT,
@@ -20,6 +21,7 @@ export const pushPayout = (wallet) => ({type: PUSH_PAYOUT, payload: wallet})
 export const payDouble = (wallet) => ({type: PAY_DOUBLE, payload: wallet})
 export const winDouble = (wallet) => ({type: WIN_DOUBLE, payload: wallet})
 export const togDouble = (wallet) => ({type: TOGGLE_DOUBLE, payload: wallet})
+export const currentUser = (user) => ({type: CURRENT_USER, payload: user})
 
 export const shuffleDeck = () => async dispatch => { 
     const response = await axios.get('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=6')
@@ -41,13 +43,4 @@ export const dealerDrawOne = (deckId) => async dispatch => {
     dispatch({ type: DEALER_DRAW_ONE, payload: response.data })
 }
 
-export const createUser = (user) => async dispatch => { 
-    const response = await axios.post(`http://localhost:3001/users`, {
-        user
-    })
-
-    dispatch({ type: CREATE_USER, payload: response.data })
-    console.log(response.data)
-    history.push('/start')  
-}
 

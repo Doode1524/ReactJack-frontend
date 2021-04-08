@@ -1,7 +1,7 @@
 import React from 'react'
 import history from '../history'
 import { Router, Route, Switch } from 'react-router-dom'
-import { shuffleDeck } from '../actions'
+import { shuffleDeck, currentUser } from '../actions'
 import { connect } from 'react-redux'
 import Welcome from './Welcome'
 import Draw from './Draw'
@@ -25,11 +25,22 @@ class App extends React.Component {
         this.loginStatus()
     }
 
+    handleClick = () => {
+        axios
+          .delete("http://localhost:3001/logout", { withCredentials: true })
+          .then((response) => {
+            this.handleLogout();
+            this.history.push("/");
+          })
+          .catch((error) => console.log(error));
+    };
+
     handleLogin = (data) => {
         this.setState ({
             isLoggedIn: true,
             user: data.user
         })
+        this.props.currentUser(this.state.user)
     }
 
     handleLogout = () => {
@@ -75,7 +86,10 @@ class App extends React.Component {
                         loggedInStatus={this.state.isLoggedIn} />
                     )} />
                     <Route path='/start' exact component={Welcome} />
-                    <Route path='/play' exact component={Draw} />
+                    <Route exact path='/play' render={props => (
+                        <Draw {...props} handleLogout={this.handleLogout} handleClick={this.handleClick}
+                        loggedInStatus={this.state.isLoggedIn} />
+                    )} />
                 </Switch>
             </div>
                 <Footer />
@@ -84,4 +98,4 @@ class App extends React.Component {
     }
 }
 
-export default connect(null, { shuffleDeck })(App)
+export default connect(null, { shuffleDeck, currentUser })(App)
