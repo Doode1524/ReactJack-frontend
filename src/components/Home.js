@@ -8,14 +8,15 @@ const Home = (props) => {
   return (
     <div className="cards-div">
       <Link to="/login" className="button">Log In</Link>
+      <h1>ReactJack!</h1>
       <Link to="/signup" className="button">Sign Up</Link>
-
-      {props.loggedInStatus ? (
-        <Link to="/logout" className="button" onClick={props.handleClick}>
-          Log Out
-        </Link>
-      ) : null}
     </div>
   );
 };
 export default Home;
+
+{/* {props.loggedInStatus ? (
+  <Link to="/logout" className="button" onClick={props.handleClick}>
+    Log Out
+  </Link>
+) : null} */}

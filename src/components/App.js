@@ -36,9 +36,9 @@ class App extends React.Component {
         };
         
          handlePatch = async () => {
-            this.props.userWallet(this.props.wallet[0])
+            this.props.userWallet(this.props.wallet)
             let user = {
-                wallet: this.props.wallet[0]
+                wallet: this.props.wallet
               }
 
             axios
