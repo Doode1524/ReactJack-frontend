@@ -23,6 +23,7 @@ class App extends React.Component {
 
     componentDidMount() {
         this.loginStatus()
+        return this.props.loggedInStatus ? this.redirect() : null
     }
 
     handleClick = async () => {
@@ -80,9 +81,9 @@ class App extends React.Component {
         .catch(error => console.log('api errors:', error))
     }
 
-    componentWillMount() {
-        return this.props.loggedInStatus ? this.redirect() : null
-    }
+    // componentDidMount() {
+    //     return this.props.loggedInStatus ? this.redirect() : null
+    // }
 
     render() {
     return (
