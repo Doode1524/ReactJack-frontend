@@ -1,62 +1,63 @@
-import React, { Component } from 'react';
-import axios from 'axios'
+import React, { Component } from "react";
+import axios from "axios";
 class Signup extends Component {
   constructor(props) {
     super(props);
-    this.state = { 
-      email: '',
-      password: '',
-      password_confirmation: '',
-      errors: ''
-     };
+    this.state = {
+      email: "",
+      password: "",
+      password_confirmation: "",
+      errors: "",
+    };
   }
-handleChange = (event) => {
-    const {name, value} = event.target
+  handleChange = (event) => {
+    const { name, value } = event.target;
     this.setState({
-      [name]: value
-    })
+      [name]: value,
+    });
   };
-handleSubmit = (event) => {
-    event.preventDefault()
-    const {email, password, password_confirmation} = this.state
+  handleSubmit = (event) => {
+    event.preventDefault();
+    const { email, password, password_confirmation } = this.state;
     let user = {
       email: email,
       password: password,
-      password_confirmation: password_confirmation
-    }
-axios.post('http://localhost:3001/users', {user}, {withCredentials: true})
-    .then(response => {
-      if (response.statusText === 'Created') {
-        this.props.handleLogin({user: response.data})
-        this.redirect()
-      } else {
-        this.setState({
-          errors: response.data.errors
-        })
-      }
-    })
-    .catch(error => console.log('api errors:', error))
+      password_confirmation: password_confirmation,
+    };
+    axios
+      .post("http://localhost:3001/users", { user }, { withCredentials: true })
+      .then((response) => {
+        if (response.statusText === "Created") {
+          this.props.handleLogin({ user: response.data });
+          this.redirect();
+        } else {
+          this.setState({
+            errors: response.data.errors,
+          });
+        }
+      })
+      .catch((error) => console.log("api errors:", error));
   };
-redirect = () => {
-    this.props.history.push('/start')
-  }
+  redirect = () => {
+    this.props.history.push("/start");
+  };
   handleErrors = () => {
     return (
       <div>
         <ul>
-        {this.state.errors.map(error => {
-        return <li key={error}>{error}</li>
+          {this.state.errors.map((error) => {
+            return <li key={error}>{error}</li>;
           })}
         </ul>
       </div>
-    )
-  }
-render() {
-    const {email, password, password_confirmation} = this.state
-return (
+    );
+  };
+  render() {
+    const { email, password, password_confirmation } = this.state;
+    return (
       <div className="cards-div">
         <h1>Sign Up</h1>
-       <form className="form-style-7" onSubmit={this.handleSubmit}>
+        <form className="form-style-7" onSubmit={this.handleSubmit}>
           <input
             placeholder="email"
             type="text"
@@ -64,7 +65,7 @@ return (
             value={email}
             onChange={this.handleChange}
           />
-          <input 
+          <input
             placeholder="password"
             type="password"
             name="password"
@@ -78,17 +79,12 @@ return (
             value={password_confirmation}
             onChange={this.handleChange}
           />
-        
+
           <button className="button" placeholder="submit" type="submit">
             Sign Up
           </button>
-      
         </form>
-        <div>
-          {
-            this.state.errors ? this.handleErrors() : null
-          }
-        </div>
+        <div>{this.state.errors ? this.handleErrors() : null}</div>
       </div>
     );
   }
