@@ -1,5 +1,7 @@
 import React from "react";
 import Home from "./Home";
+import BetButtons from './BetButtons'
+import DeckButtons from './DeckButtons'
 import {
   drawTwoCards,
   userDrawOne,
@@ -182,16 +184,7 @@ const Draw = (props) => {
     if (props.userCards && props.dealerCards) {
       return (
         <>
-          <button className="button" onClick={handleUserDrawOne}>
-            Hit Me
-          </button>
-          <button className="button" onClick={handleDealerDrawOne}>
-            Stay
-          </button>
-          <button className="button">Split</button>
-          <button className="button" onClick={handleDouble}>
-            Double Down
-          </button>
+          <BetButtons handleUserDrawOne={handleUserDrawOne} handleDealerDrawOne={handleDealerDrawOne} handleDouble={handleDouble}/>
           <div>
             <h3>
               Total: {userValues.reduce((a, b) => a + b, 0)}{" "}
@@ -244,25 +237,7 @@ const Draw = (props) => {
   return (
     <div className="cards-div">
       <div>
-        <button className="button" onClick={handleDrawTwo}>
-          Draw
-        </button>
-        <button className="button" onClick={handleShuffle}>
-          Shuffle Deck
-        </button>
-        <button className="button" onClick={handleAddFunds}>
-          Add Funds
-        </button>
-        <button
-          className="button"
-          onClick={async () => {
-            await props.handlePatch();
-            await props.handleClick();
-          }}
-        >
-          Cash Out
-        </button>
-
+        <DeckButtons handleDrawTwo={handleDrawTwo} handleShuffle={handleShuffle} handleAddFunds={handleAddFunds} handlePatch={props.handlePatch} handleClick={props.handleClick} />
         <div>{dealerDrawnCards()}</div>
         {userDrawnCards()}
         <div>{buttons()}</div>
