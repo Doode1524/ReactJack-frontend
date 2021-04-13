@@ -81,10 +81,6 @@ class App extends React.Component {
         .catch(error => console.log('api errors:', error))
     }
 
-    // componentDidMount() {
-    //     return this.props.loggedInStatus ? this.redirect() : null
-    // }
-
     render() {
     return (
         <Router history={history}>
@@ -113,7 +109,6 @@ class App extends React.Component {
         )
     }
 }
-
 
 const mapStateToProps = (state) => {
     return {

@@ -1,8 +1,10 @@
 import React from "react";
-import Home from "./Home";
 import BetButtons from './BetButtons'
 import DeckButtons from './DeckButtons'
 import UserDrawnCards from './UserDrawnCards'
+import DealerDrawnCards from './DealerDrawnCards'
+import { connect, useDispatch } from "react-redux";
+import "../cards.css";
 import {
   drawTwoCards,
   userDrawOne,
@@ -17,10 +19,6 @@ import {
   currentUser,
   addFunds,
 } from "../actions";
-import { connect, useDispatch } from "react-redux";
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import "../cards.css";
 
 const Draw = (props) => {
   let userValues = [];
@@ -181,52 +179,41 @@ const Draw = (props) => {
     dispatch(addFunds(props.wallet));
   };
 
-  // const buttons = () => {
-  //   if (props.userCards && props.dealerCards) {
-  //     return (
-  //       <>
-  //         <BetButtons handleUserDrawOne={handleUserDrawOne} handleDealerDrawOne={handleDealerDrawOne} handleDouble={handleDouble}/>
-         
-  //       </>
-  //     );
-  //   }
-  // };
-
-  const dealerDrawnCards = () => {
-    pushUserValues();
-    pushDealerValues();
-    handleDealerAces();
-
-    if (
-      props.dealerCards &&
-      dealerValues.reduce((a, b) => a + b, 0) < 17 &&
-      props.dealerCards.length > 1 &&
-      dealerValues.reduce((a, b) => a + b, 0) <=
-        userValues.reduce((a, b) => a + b, 0)
-    ) {
-      props.dealerDrawOne(props.deckId);
-    }
-
-    return (
-      props.dealerCards &&
-      props.dealerCards.map((card, i) => (
-        <img width="200" height="250" src={card.image} key={i} />
-      ))
-    );
-  };
-
-
   const dispatch = useDispatch();
-
+  
   return (
     <div className="cards-div">
       <div>
-        <DeckButtons handleDrawTwo={handleDrawTwo} handleShuffle={handleShuffle} handleAddFunds={handleAddFunds} handlePatch={props.handlePatch} handleClick={props.handleClick} />
-        <div>{dealerDrawnCards()}</div>
+        <DeckButtons 
+          handleDrawTwo={handleDrawTwo} 
+          handleShuffle={handleShuffle} 
+          handleAddFunds={handleAddFunds} 
+          handlePatch={props.handlePatch} 
+          handleClick={props.handleClick} 
+        />
+        <div>
+          <DealerDrawnCards 
+            pushUserValues={pushUserValues} 
+            pushDealerValues={pushDealerValues}
+            handleDealerAces={handleDealerAces} 
+            dealerCards={props.dealerCards} 
+            dealerValues={dealerValues} 
+            userValues={userValues} 
+            dealerDrawOne={props.dealerDrawOne} 
+            deckId={props.deckId}
+          />
+        </div>
         <UserDrawnCards userCards={props.userCards} handleAces={() => handleAces}/>
           <div>
             {props.userCards && props.dealerCards &&
-              <BetButtons handleUserDrawOne={handleUserDrawOne} handleDealerDrawOne={handleDealerDrawOne} handleDouble={handleDouble} userValues={userValues} dealerValues={dealerValues} wallet={props.wallet}/>}
+              <BetButtons 
+                handleUserDrawOne={handleUserDrawOne} 
+                handleDealerDrawOne={handleDealerDrawOne} 
+                handleDouble={handleDouble} 
+                userValues={userValues} 
+                dealerValues={dealerValues} 
+                wallet={props.wallet}
+              />}
           </div>
         </div>
     </div>

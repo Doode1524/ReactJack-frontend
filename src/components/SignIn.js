@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 class Login extends Component {
+  
   constructor(props) {
     super(props);
     this.state = {
@@ -10,6 +11,7 @@ class Login extends Component {
       errors: "",
     };
   }
+
   handleChange = (event) => {
     const { name, value } = event.target;
     this.setState({
@@ -43,6 +45,7 @@ class Login extends Component {
   redirect = () => {
     this.props.history.push("/start");
   };
+
   handleErrors = () => {
     return (
       <div>
@@ -54,6 +57,7 @@ class Login extends Component {
       </div>
     );
   };
+
   render() {
     const { email, password } = this.state;
     return (

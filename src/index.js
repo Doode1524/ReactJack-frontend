@@ -4,12 +4,8 @@ import { Provider } from 'react-redux'
 import { createStore, applyMiddleware, compose } from 'redux'
 import reduxThunk from 'redux-thunk'
 
-
 import App from './components/App'
 import rootReducer from './reducers'
-import deckReducer from './reducers/deckReducer'
-import userReducer from './reducers/deckReducer'
-
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 

@@ -16,10 +16,10 @@ export default (state = INITIAL_STATE, action) => {
             return {...state, userCards: [action.payload.cards[0], action.payload.cards[2]],  dealerCards: [action.payload.cards[1]], userCardValues: ucv, deck: action.payload }
         case USER_DRAW_ONE:
             return {
-                    ...state,
-                    userCards: [...state.userCards, action.payload.cards[0]],
-                    userCardValues: [...state.userCardValues, action.payload.cards[0].value], deck: action.payload 
-                    }
+                ...state,
+                userCards: [...state.userCards, action.payload.cards[0]],
+                userCardValues: [...state.userCardValues, action.payload.cards[0].value], deck: action.payload 
+            }
         case DEALER_DRAW_ONE:
             return {...state, dealerCards: [...state.dealerCards, action.payload.cards[0]], deck: action.payload }
         default:

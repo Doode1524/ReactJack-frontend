@@ -1,9 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import "../cards.css";
 
-const Home = (props) => {
+const Home = () => {
   return (
     <div className="cards-div">
       <Link to="/login" className="button">
