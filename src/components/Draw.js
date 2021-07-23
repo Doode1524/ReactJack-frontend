@@ -1,8 +1,8 @@
 import React from "react";
-import BetButtons from './BetButtons'
-import DeckButtons from './DeckButtons'
-import UserDrawnCards from './UserDrawnCards'
-import DealerDrawnCards from './DealerDrawnCards'
+import BetButtons from "./BetButtons";
+import DeckButtons from "./DeckButtons";
+import UserDrawnCards from "./UserDrawnCards";
+import DealerDrawnCards from "./DealerDrawnCards";
 import { connect, useDispatch } from "react-redux";
 import "../cards.css";
 import {
@@ -180,42 +180,46 @@ const Draw = (props) => {
   };
 
   const dispatch = useDispatch();
-  
+
   return (
     <div className="cards-div">
       <div>
-        <DeckButtons 
-          handleDrawTwo={handleDrawTwo} 
-          handleShuffle={handleShuffle} 
-          handleAddFunds={handleAddFunds} 
-          handlePatch={props.handlePatch} 
-          handleClick={props.handleClick} 
+        <DeckButtons
+          handleDrawTwo={handleDrawTwo}
+          handleShuffle={handleShuffle}
+          handleAddFunds={handleAddFunds}
+          handlePatch={props.handlePatch}
+          handleClick={props.handleClick}
         />
         <div>
-          <DealerDrawnCards 
-            pushUserValues={pushUserValues} 
+          <DealerDrawnCards
+            pushUserValues={pushUserValues}
             pushDealerValues={pushDealerValues}
-            handleDealerAces={handleDealerAces} 
-            dealerCards={props.dealerCards} 
-            dealerValues={dealerValues} 
-            userValues={userValues} 
-            dealerDrawOne={props.dealerDrawOne} 
+            handleDealerAces={handleDealerAces}
+            dealerCards={props.dealerCards}
+            dealerValues={dealerValues}
+            userValues={userValues}
+            dealerDrawOne={props.dealerDrawOne}
             deckId={props.deckId}
           />
         </div>
-        <UserDrawnCards userCards={props.userCards} handleAces={() => handleAces}/>
-          <div>
-            {props.userCards && props.dealerCards &&
-              <BetButtons 
-                handleUserDrawOne={handleUserDrawOne} 
-                handleDealerDrawOne={handleDealerDrawOne} 
-                handleDouble={handleDouble} 
-                userValues={userValues} 
-                dealerValues={dealerValues} 
-                wallet={props.wallet}
-              />}
-          </div>
+        <UserDrawnCards
+          userCards={props.userCards}
+          handleAces={() => handleAces}
+        />
+        <div>
+          {props.userCards && props.dealerCards && (
+            <BetButtons
+              handleUserDrawOne={handleUserDrawOne}
+              handleDealerDrawOne={handleDealerDrawOne}
+              handleDouble={handleDouble}
+              userValues={userValues}
+              dealerValues={dealerValues}
+              wallet={props.wallet}
+            />
+          )}
         </div>
+      </div>
     </div>
   );
 };

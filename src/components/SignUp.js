@@ -56,7 +56,7 @@ class Signup extends Component {
       </div>
     );
   };
-  
+
   render() {
     const { email, password, password_confirmation } = this.state;
     return (

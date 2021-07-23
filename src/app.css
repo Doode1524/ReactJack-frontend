@@ -1,16 +1,15 @@
 .app {
-    background-image: url('bjtable.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: 100vh;
-    width: 100vw;
-
+  background-image: url("bjtable.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+  width: 100vw;
 }
 
 body {
-    display: contents;
+  display: contents;
 }
 
 .root {
-    display: contents;
+  display: contents;
 }
